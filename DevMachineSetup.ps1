@@ -22,15 +22,14 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 
+#SQL Server - must install first as won't install if a pending reboot is required
+choco install sql-server-2019 -y --params "'/SECURITYMODE=SQL /SAPWD=n0b0dyMUSTknow! /ROLE=AllFeatures_WithDefaults'" #Change pasword, write it down
+choco install sql-server-management-studio -y
+
 #Frameworks
 choco install dotnetfx -y # .NET 4.8
 choco install dotnetcore-sdk -y # .NET Core 3.1
 choco install dotnet-sdk -y # .NET 6.0
-
-#SQL Server
-choco install sql-server-2019 -y --params "'/SECURITYMODE=SQL /SAPWD=n0b0dyMUSTknow! /ROLE=AllFeatures_WithDefaults'" #Change pasword, write it down
-choco install sql-server-management-studio -y
-
 
 #Common Tools
 choco install git -y --params "/GitAndUnixToolsOnPath /DefaultBranchName:main"
