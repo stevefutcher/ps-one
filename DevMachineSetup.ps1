@@ -5,6 +5,8 @@
 # Visual Studio
 # Many other common & useful tools
 
+$policy = Get-ExecutionPolicy -Scope CurrentUser
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser 
 
 # Self-elevate the script if required (https://blog.expta.com/2017/03/how-to-self-elevate-powershell-script.html)
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
@@ -73,6 +75,8 @@ choco install winscp -y #FTP Client
 $RegPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 Set-ItemProperty "$RegPath" -Name "HideFileExt" -Value 0 -Type Dword
 Set-ItemProperty "$RegPath" -Name "Hidden" -Value 1 -Type Dword 
+
+Set-ExecutionPolicy -ExecutionPolicy $policy -Scope CurrentUser 
 
 # SQL Server & several others require a restart
 Restart-Computer
